@@ -2,7 +2,7 @@ const program = require('commander');
 const chalk = require('chalk');
 const pkg = require('./package.json');
 
-const plugins = require('./plugins');
+const plugins = require('./src/plugins');
 
 function registerPlugin(plugin) {
   let pro = program
