@@ -11,6 +11,7 @@ module.exports = {
   ],
   action: action,
   help: () => {
+    console.log('');
     console.log('  Examples:');
     console.log('');
     console.log('    $ ast dev');

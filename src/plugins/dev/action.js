@@ -64,7 +64,6 @@ module.exports = function (command) {
     for (let i = 0; i < config.watch.length; i++) {
       console.log(chalk.green(config.watch[i]));
     }
-    console.log(`${chalk.green('访问地址：')}${chalk.blue('http://127.0.0.1:' + config.env.NODE_PORT)}`);
   }).on('quit', () => {
     console.log(chalk.green('应用退出成功'));
   }).on('restart', (files) => {
