@@ -1,12 +1,14 @@
 # astroboy-cli
 
-## install
+## 一、安装
 
 ```
 npm install -g astroboy-cli
 ```
 
-### dev 命令
+## 二、命令介绍
+
+### 1、dev
 
 ```
   Usage: dev [options]
