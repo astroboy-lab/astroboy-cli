@@ -10,7 +10,7 @@ module.exports = {
     console.log();
   },
   action: () => {
-    opn('https://astroboy.readme.io/');
+    opn('https://www.youzanyun.com/astroboy/');
     process.exit(0);
   }
 };
