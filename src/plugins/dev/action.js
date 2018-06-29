@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const nodemon = require('nodemon');
 const chalk = require('chalk');
+const shell = require('shelljs');
 const Util = require('../../lib/util');
 const { DEFAULT_MOCK_URL } = require('../../config');
 
@@ -11,6 +12,7 @@ module.exports = function (command) {
     console.log(chalk.red(`当前项目不存在文件 ${projectRoot}/app/app.js`));
     return;
   }
+
   const config = {
     verbose: true,
     env: {
@@ -64,6 +66,13 @@ module.exports = function (command) {
     for (let i = 0; i < config.watch.length; i++) {
       console.log(chalk.green(config.watch[i]));
     }
+
+    let execCommand = 'npm --registry=http://registry.npm.qima-inc.com outdated ';
+    const projectConfig = Util.getProjectConfig();
+    if (projectConfig.versionValid && Array.isArray(projectConfig.versionValid)) {
+      execCommand += projectConfig.versionValid.join(' ');
+    }
+    const ret = shell.exec(execCommand);
   }).on('quit', () => {
     console.log(chalk.green('应用退出成功'));
   }).on('restart', (files) => {
