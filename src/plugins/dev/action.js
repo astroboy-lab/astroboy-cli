@@ -60,10 +60,10 @@ module.exports = function (command) {
     if (command.tsconfig) {
       config.env.TS_CONFIG = command.tsconfig;
     }
-    config.env.APP_FOLDER_NAME = app_folder_ts;
+    config.env.APP_FOLDER = app_folder_ts;
     config.exec = `${node} ${ts_node} ${tsc_path_map} ${path.join(projectRoot, 'app/app.ts')}`;
   } else {
-    config.env.APP_FOLDER_NAME = app_folder;
+    config.env.APP_FOLDER = app_folder;
     config.exec = `${node} ${path.join(projectRoot, 'app/app.js')}`;
   }
 
