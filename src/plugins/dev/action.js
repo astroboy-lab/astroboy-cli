@@ -6,17 +6,14 @@ const shell = require('shelljs');
 const Util = require('../../lib/util');
 const { DEFAULT_MOCK_URL } = require('../../config');
 
-const app_folder = 'app';
-const app_folder_ts = 'app-ts';
-
 module.exports = function (command) {
   const projectRoot = Util.getProjectRoot();
-  if (!command.ts && !fs.existsSync(`${projectRoot}/${app_folder}/app.js`)) {
-    console.log(chalk.red(`当前项目不存在文件 ${projectRoot}/${app_folder}/app.js`));
+  if (!command.ts && !fs.existsSync(`${projectRoot}/app/app.js`)) {
+    console.log(chalk.red(`当前项目不存在文件 ${projectRoot}/app/app.js`));
     return;
   }
-  if (command.ts && !fs.existsSync(`${projectRoot}/${app_folder_ts}/app.ts`)) {
-    console.log(chalk.red(`当前项目不存在文件 ${projectRoot}/${app_folder_ts}/app.ts`));
+  if (command.ts && !fs.existsSync(`${projectRoot}/app/app.ts`)) {
+    console.log(chalk.red(`当前项目不存在文件 ${projectRoot}/app/app.ts`));
     return;
   }
   const config = {
@@ -60,10 +57,10 @@ module.exports = function (command) {
     if (command.tsconfig) {
       config.env.TS_CONFIG = command.tsconfig;
     }
-    config.env.APP_FOLDER = app_folder_ts;
+    config.env.APP_EXTENSIONS = JSON.stringify(['js', 'ts']);
     config.exec = `${node} ${ts_node} ${tsc_path_map} ${path.join(projectRoot, 'app/app.ts')}`;
   } else {
-    config.env.APP_FOLDER = app_folder;
+    config.env.APP_EXTENSIONS = JSON.stringify(['js']);
     config.exec = `${node} ${path.join(projectRoot, 'app/app.js')}`;
   }
 
