@@ -49,9 +49,8 @@ module.exports = function (command) {
   // 传递了 --ts 参数，示例：
   // ast dev --ts
   if (command.ts) {
-    const node_modules = path.resolve(__dirname, "./../../../node_modules");
-    const tsc_path_map = `-r ${node_modules}/tsconfig-paths/register`;
     const ts_node = `-r ${path.resolve(__dirname, "./ts-node")}`;
+    const tsc_path_map = `-r ${require.resolve("tsconfig-paths").replace("/lib/index.js", "")}/register`
     // 同时传递了 --ts和--tsconfig 参数，示例：
     // ast dev --ts --tsconfig app/tsconfig.json
     if (command.tsconfig) {
