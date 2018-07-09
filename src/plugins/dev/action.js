@@ -8,11 +8,14 @@ const { DEFAULT_MOCK_URL } = require('../../config');
 
 module.exports = function (command) {
   const projectRoot = Util.getProjectRoot();
-  if (!fs.existsSync(`${projectRoot}/app/app.js`)) {
+  if (!command.ts && !fs.existsSync(`${projectRoot}/app/app.js`)) {
     console.log(chalk.red(`当前项目不存在文件 ${projectRoot}/app/app.js`));
     return;
   }
-
+  if (command.ts && !fs.existsSync(`${projectRoot}/app/app.ts`)) {
+    console.log(chalk.red(`当前项目不存在文件 ${projectRoot}/app/app.ts`));
+    return;
+  }
   const config = {
     verbose: true,
     env: {
@@ -27,7 +30,7 @@ module.exports = function (command) {
     ignore: [
 
     ],
-    script: path.join(projectRoot, 'app/app.js')
+    // script: path.join(projectRoot, 'app/app.js')
   };
 
   // 传递了 --debug 参数，示例：
@@ -37,6 +40,28 @@ module.exports = function (command) {
     config.env.DEBUG = '*';
   } else if (command.debug && command.debug !== true) {
     config.env.DEBUG = command.debug;
+  }
+
+  // 传递了 --inspect 参数，示例：
+  // ast dev --inspect
+  const node = `node${!!command.inspect ? " --inspect" : ""}`;
+
+  // 传递了 --ts 参数，示例：
+  // ast dev --ts
+  if (command.ts) {
+    const node_modules = path.resolve(__dirname, "./../../../node_modules");
+    const tsc_path_map = `-r ${node_modules}/tsconfig-paths/register`;
+    const ts_node = `-r ${path.resolve(__dirname, "./ts-node")}`;
+    // 同时传递了 --ts和--tsconfig 参数，示例：
+    // ast dev --ts --tsconfig app/tsconfig.json
+    if (command.tsconfig) {
+      config.env.TS_CONFIG = command.tsconfig;
+    }
+    config.env.APP_EXTENSIONS = JSON.stringify(['js', 'ts']);
+    config.exec = `${node} ${ts_node} ${tsc_path_map} ${path.join(projectRoot, 'app/app.ts')}`;
+  } else {
+    config.env.APP_EXTENSIONS = JSON.stringify(['js']);
+    config.exec = `${node} ${path.join(projectRoot, 'app/app.js')}`;
   }
 
   // 传递了--mock 参数

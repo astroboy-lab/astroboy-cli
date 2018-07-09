@@ -1,6 +1,6 @@
 {
   "name": "astroboy-cli",
-  "version": "0.0.6",
+  "version": "0.0.7-beta",
   "description": "",
   "main": "index.js",
   "scripts": {},
@@ -29,6 +29,11 @@
     "nodemon": "^1.17.3",
     "opn": "^5.3.0",
     "ora": "^2.0.0",
-    "shelljs": "^0.8.2"
+    "shelljs": "^0.8.2",
+    "ts-node": "^7.0.0",
+    "tsconfig-paths": "^3.4.2"
+  },
+  "devDependencies": {
+    "typescript": "^2.9.2"
   }
 }
