@@ -54,7 +54,7 @@ module.exports = function (command) {
     // 同时传递了 --ts和--tsconfig 参数，示例：
     // ast dev --ts --tsconfig app/tsconfig.json
     if (command.tsconfig) {
-      config.env.TS_CONFIG = command.tsconfig;
+      config.env.TS_NODE_PROJECT = command.tsconfig;
     }
     config.env.APP_EXTENSIONS = JSON.stringify(['js', 'ts']);
     config.exec = `${node} ${ts_node} ${tsc_path_map} ${path.join(projectRoot, 'app/app.ts')}`;
