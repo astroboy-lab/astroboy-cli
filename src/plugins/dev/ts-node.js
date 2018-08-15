@@ -1,6 +1,7 @@
-const { TS_CONFIG } = process.env;
+const { TS_NODE_PROJECT } = process.env;
 
 const tsnode = require("ts-node").register({
-  project: TS_CONFIG,
-  pretty: true
+  project: TS_NODE_PROJECT,
+  pretty: true,
+  transpileOnly: true
 })
