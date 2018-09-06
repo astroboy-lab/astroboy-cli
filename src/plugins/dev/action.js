@@ -99,6 +99,7 @@ module.exports = function (command) {
     const ret = shell.exec(execCommand);
   }).on('quit', () => {
     console.log(chalk.green('应用退出成功'));
+    process.exit(0);
   }).on('restart', (files) => {
     console.log(chalk.green('监听到文件修改：', files));
   });
