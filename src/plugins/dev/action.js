@@ -6,6 +6,10 @@ const shell = require('shelljs');
 const Util = require('../../lib/util');
 const { DEFAULT_MOCK_URL } = require('../../config');
 
+/**
+ * @param {import('commander').Command} command
+ * @returns
+ */
 module.exports = function (command) {
   const projectRoot = Util.getProjectRoot();
   if (!command.ts && !fs.existsSync(`${projectRoot}/app/app.js`)) {
@@ -16,17 +20,28 @@ module.exports = function (command) {
     console.log(chalk.red(`当前项目不存在文件 ${projectRoot}/app/app.ts`));
     return;
   }
+
+  const fixedWatchTargets = [
+    path.join(projectRoot, 'app/**/*.*'),
+    path.join(projectRoot, 'config/**/*.*'),
+    path.join(projectRoot, 'plugins/**/*.*'),
+  ];
+  // 传递了 --watcb 参数，指定额外的监听目录，实例：
+  // ast dev --watch definitions
+  const externalWatchTargets = command.watch ? command.watch.split(',').map(watchPath => {
+    const watchTarget = path.join(projectRoot, watchPath.trim());
+    // 判断外部指定的是目录还是文件
+    return fs.statSync(watchTarget).isDirectory() ? path.join(watchTarget, '**/*.*') : watchTarget;
+  }) : [];
+  const watchTargets = fixedWatchTargets.concat(externalWatchTargets);
+
   const config = {
     verbose: true,
     env: {
       NODE_ENV: command.env ? command.env : 'development',
       NODE_PORT: command.port ? command.port : 8201
     },
-    watch: [
-      path.join(projectRoot, 'app/**/*.*'),
-      path.join(projectRoot, 'config/**/*.*'),
-      path.join(projectRoot, 'plugins/**/*.*')
-    ],
+    watch: watchTargets,
     ignore: [
 
     ],

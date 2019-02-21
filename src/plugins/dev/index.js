@@ -10,7 +10,8 @@ module.exports = {
     ['--mock [proxyUrl]', '开启 mock 模式，默认 proxy 地址为 http://127.0.0.1:8001'],
     ['--ts [open]', '开启 ts-node 模式'],
     ['--tsconfig [config]', '使用自定义的ts编译配置文件'],
-    ['--inspect [inspect]', '启用inspector，开启编辑器断点调试']
+    ['--inspect [inspect]', '启用inspector，开启编辑器断点调试'],
+    ['--watch [watchDirs]', '指定额外的监听目录']
   ],
   action: action,
   help: () => {
@@ -29,6 +30,7 @@ module.exports = {
     console.log('    $ ast dev --ts');
     console.log('    $ ast dev --ts --tsconfig app/tsconfig.json');
     console.log('    $ ast dev --ts --inspect');
+    console.log('    $ ast dev --watch definitions');
     console.log();
   }
 };
