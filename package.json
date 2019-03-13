@@ -3,7 +3,9 @@
   "version": "0.0.9",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "release": "sh release.sh"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/astroboy-lab/astroboy-cli.git"
