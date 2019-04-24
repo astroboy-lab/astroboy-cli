@@ -33,9 +33,7 @@
     "ora": "^2.0.0",
     "shelljs": "^0.8.2",
     "ts-node": "^7.0.0",
-    "tsconfig-paths": "^3.4.2"
-  },
-  "devDependencies": {
+    "tsconfig-paths": "^3.4.2",
     "typescript": "^2.9.2"
   }
 }
