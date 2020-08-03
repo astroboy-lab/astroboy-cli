@@ -3,15 +3,12 @@ const { existsSync } = require('fs-extra');
 const Util = require('../../lib/util');
 const ROOT = Util.getProjectRoot()
 
-
 const DEFAULT_CONFIG = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  // setupFiles: ['<rootDir>/test/jest.init.js'],
   transform: {
     '\\.(js|jsx|ts|tsx)$': 'ts-jest',
   },
-  // testMatch: ['<rootDir>/app/__tests__/**/*.test.js'],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/__mock__/',
