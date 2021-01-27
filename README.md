@@ -23,7 +23,7 @@ npm install -g astroboy-cli
     --mock [proxyUrl]    开启 mock 模式，默认 proxy 地址为 http://127.0.0.1:8001
     --ts [open]          开启 ts-node 模式
     --tsconfig [config]  使用自定义的ts编译配置文件
-    --inspect [inspect]  启用inspector，开启编辑器断点调试
+    --inspect [inspect]  启用inspector，开启编辑器断点调试，默认9229端口
     --watch [watchDirs]  指定额外的监听目录
     -h, --help           output usage information
 
@@ -40,6 +40,6 @@ npm install -g astroboy-cli
     $ ast dev --env qa --port 8201
     $ ast dev --ts
     $ ast dev --ts --tsconfig app/tsconfig.json
-    $ ast dev --ts --inspect
+    $ ast dev --ts --inspect 9229
     $ ast dev --watch definitions
 ```
