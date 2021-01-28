@@ -4,11 +4,12 @@ const chalk = require('chalk');
 const glob = require('fast-glob');
 const { METHODS } = require('http');
 const prettier = require('prettier');
+const util = require('util');
 
 const { DEFAULT_ROUTER_DIR } = require('../../config');
 
 function obj2JSContent(obj) {
-  return `module.exports = ${JSON.stringify(obj)}`;
+  return `module.exports = ${util.format(obj)}`;
 }
 
 function prettyCode(code) {
