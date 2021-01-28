@@ -59,7 +59,7 @@ module.exports = function (command) {
 
   // 传递了 --inspect 参数，示例：
   // ast dev --inspect
-  const node = `node${!!command.inspect ? " --inspect" : ""}`;
+  const node = `node${!!command.inspect ? ` --inspect=${String(command.inspect) === "true" ? 9229 : command.inspect}` : ""}`;
 
   // 传递了 --ts 参数，示例：
   // ast dev --ts
