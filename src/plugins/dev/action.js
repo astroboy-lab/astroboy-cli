@@ -26,7 +26,8 @@ module.exports = function (command) {
     path.join(projectRoot, 'config/**/*.*'),
     path.join(projectRoot, 'plugins/**/*.*'),
   ];
-  // 传递了 --watcb 参数，指定额外的监听目录，实例：
+
+  // 传递了 --watch 参数，指定额外的监听目录，实例：
   // ast dev --watch definitions
   const externalWatchTargets = command.watch ? command.watch.split(',').map(watchPath => {
     const watchTarget = path.join(projectRoot, watchPath.trim());
@@ -35,6 +36,14 @@ module.exports = function (command) {
   }) : [];
   const watchTargets = fixedWatchTargets.concat(externalWatchTargets);
 
+  // 传递了 --ignore 参数，指定忽略的目录，实例：
+  // ast dev --ignore definitions
+  const ignoreTargets = command.ignore ? command.ignore.split(',').map(ignorePath => {
+    const ignoreTarget = path.join(projectRoot, ignorePath.trim());
+    // 判断外部指定的是目录还是文件
+    return fs.statSync(ignoreTarget).isDirectory() ? path.join(ignoreTarget, '**/*.*') : ignoreTarget;
+  }) : [];
+
   const config = {
     verbose: true,
     env: {
@@ -42,9 +51,7 @@ module.exports = function (command) {
       NODE_PORT: command.port ? command.port : 8201
     },
     watch: watchTargets,
-    ignore: [
-
-    ],
+    ignore: ignoreTargets,
     // script: path.join(projectRoot, 'app/app.js')
   };
 
@@ -104,6 +111,12 @@ module.exports = function (command) {
     console.log(chalk.green('\n监听目录变化：'));
     for (let i = 0; i < config.watch.length; i++) {
       console.log(chalk.green(config.watch[i]));
+    }
+    if (config.ignore.length > 0) {
+      console.log(chalk.green('\n忽略目录变化：'));
+      for (let i = 0; i < config.ignore.length; i++) {
+        console.log(chalk.green(config.ignore[i]));
+      }
     }
 
     let execCommand = 'npm --registry=http://registry.npm.qima-inc.com outdated ';

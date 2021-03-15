@@ -24,6 +24,7 @@ Options:
   --tsconfig [config]  使用自定义的ts编译配置文件
   --inspect [inspect]  启用inspector，开启编辑器断点调试
   --watch [watchDirs]  指定额外的监听目录
+  --ignore [ignoreDirs]  指定忽略的目录
   -h, --help           output usage information
 
   Examples:
@@ -41,4 +42,5 @@ Options:
     $ ast dev --ts --tsconfig app/tsconfig.json
     $ ast dev --ts --inspect
     $ ast dev --watch definitions
+    $ ast dev --ignore definitions
 ```
