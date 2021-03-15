@@ -8,12 +8,12 @@ npm install -g astroboy-cli
 
 ## 二、命令介绍
 
-### 1、dev
+### 1、ast dev
 
 ```
-Usage: dev [options]
+  Usage: dev [options]
 
-本地开发，开启后端服务
+  本地开发，开启后端服务
 
 Options:
   --debug [debugName]  开启 debug 模式
@@ -40,7 +40,7 @@ Options:
     $ ast dev --env qa --port 8201
     $ ast dev --ts
     $ ast dev --ts --tsconfig app/tsconfig.json
-    $ ast dev --ts --inspect
+    $ ast dev --ts --inspect 9229
     $ ast dev --watch definitions
     $ ast dev --ignore definitions
 ```

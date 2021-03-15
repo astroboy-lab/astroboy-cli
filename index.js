@@ -27,7 +27,6 @@ program
 program
   .command('*')
   .action((commandName) => {
-    console.log(arguments);
     console.log(chalk.red(`命令 ${commandName} 不存在！`));
   });
 
