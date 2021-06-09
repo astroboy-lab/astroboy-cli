@@ -11,7 +11,8 @@ module.exports = {
     ['--ts [open]', '开启 ts-node 模式'],
     ['--tsconfig [config]', '使用自定义的ts编译配置文件'],
     ['--inspect [inspect]', '启用inspector，开启编辑器断点调试'],
-    ['--watch [watchDirs]', '指定额外的监听目录']
+    ['--watch [watchDirs]', '指定额外的监听目录'],
+    ['--ignore [ignoreDirs]', '指定忽略的目录']
   ],
   action: action,
   help: () => {
@@ -31,6 +32,7 @@ module.exports = {
     console.log('    $ ast dev --ts --tsconfig app/tsconfig.json');
     console.log('    $ ast dev --ts --inspect');
     console.log('    $ ast dev --watch definitions');
+    console.log('    $ ast dev --ignore definitions');
     console.log();
   }
 };
